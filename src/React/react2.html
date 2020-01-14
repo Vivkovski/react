@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <style>
+    div{
+      display: inline-block;
+      box-sizing: border-box;
+    }
+    header > nav
+    {
+      height: 80px;
+      display: inline-block;
+      width: 100%;
+    }
+    header .item, header img
+    {
+      height: 80px;
+    }
+  </style>
+  <script src="https://unpkg.com/react/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone/babel.js"></script>
+  <script type="text/babel">
+    window.onload = function()
+    {
+    function AppHeader()
+    {
+      return (
+        <header className="ui fixed menu">
+          <nav className="ui container">
+            <a href="#" className="header item">
+              <img className="logo" src="https://typeofweb.com/wp-content/uploads/2017/08/cropped-typeofweb_logo-04-white-smaller-1-e1504359870362.png" />
+              Lista kontaktów
+            </a>
+            <div className="header item">
+              <button className="ui button">Dodaj</button>
+            </div>
+          </nav>
+        </header>
+      );
+    }
+
+    function ContactList()
+    {
+      return (
+      <ul className="ui relaxed divided list selection">
+        <ContactItem
+          login="typeofweb1"
+          name="Lena"
+          department="JavaScript Developer"
+        />
+        <ContactItem
+          login="typeofweb2"
+          name="Brian"
+          department="Human Resources"
+        />
+        <ContactItem
+          login="typeofweb3"
+          name="Rick"
+          department="QA"
+        />
+        <ContactItem
+          login="typeofweb3@gamil.com"
+          name="Rick"
+          department="QA"
+        />
+      </ul>
+    );
+    }
+
+    function Image({url})
+    {
+      return(
+          <img src={url} className="ui mini rounded image" />
+      );
+    }
+
+    function ContactItem({ login, name, department })
+    {
+      let urlData = "";
+      if(!login.includes("@"))
+      {
+        urlData = `https://api.adorable.io/avatars/55/${login}.png`;
+      }
+      return (
+        <li className="item">
+        <Image url={urlData} />
+          <div className="content">
+            <h4 className="header">{name}</h4>
+            <div className="description">{department}</div>
+          </div>
+        </li>
+      );
+    }
+
+    function MainCmponent()
+    {
+      return (
+        <div>
+          <AppHeader />
+          <main className="ui main text container">
+            <ContactList />
+          </main>
+        </div>
+      );
+    }
+
+    ReactDOM.render(
+      <MainCmponent />,
+      document.getElementById("main")
+    );
+
+    }
+  </script>
+  </head>
+  <body>
+    <div id="main"></div>
+  </body>
+</html> 
